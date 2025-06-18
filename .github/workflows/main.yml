@@ -13,20 +13,13 @@ jobs:
       - name: Download bundletool
         run: wget https://github.com/google/bundletool/releases/download/1.15.6/bundletool-all-1.15.6.jar -O bundletool.jar
 
-      - name: Create keystore
-        run: |
-          keytool -genkeypair -v -keystore my-release-key.jks -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=example, OU=example, O=example, L=example, S=example, C=US"
-
-      - name: Build Universal APK
+      - name: Build Universal APK (unsigned)
         run: |
           java -jar bundletool.jar build-apks \
             --bundle=app.aab \
             --output=output.apks \
             --mode=universal \
-            --ks=my-release-key.jks \
-            --ks-pass=pass:password \
-            --ks-key-alias=my-key-alias \
-            --key-pass=pass:password
+            --overwrite
 
       - name: Extract APK
         run: unzip -o output.apks 'universal.apk'
