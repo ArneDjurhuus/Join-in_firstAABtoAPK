@@ -16,7 +16,7 @@ jobs:
       - name: Build Universal APK (unsigned)
         run: |
           java -jar bundletool.jar build-apks \
-            --bundle=app.aab \
+            --bundle=application-a7a38c51-3d15-43c4-99a5-7fe95097c33b.aab \
             --output=output.apks \
             --mode=universal \
             --overwrite
